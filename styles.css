@@ -1,0 +1,59 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.product-selection, .quantity-selection, .service-sheet {
+    margin-bottom: 20px;
+}
+
+.product-selection label, .quantity-selection label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.product-selection select, .quantity-selection input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.service-sheet h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.service-item {
+    margin-bottom: 20px;
+}
+
+.service-item input[type="text"], .service-item input[type="file"] {
+    display: block;
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
