@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const productSelect = document.getElementById('product');
     const quantityInput = document.getElementById('quantity');
+    const pruebasInput = document.getElementById('pruebas');
+    const medicionesInput = document.getElementById('mediciones');
+    const limpiezasInput = document.getElementById('limpiezas');
+    const extraccionOilInput = document.getElementById('extraccion_oil');
     const serviceItems = document.getElementById('service-items');
     const addItemButton = document.getElementById('add-item');
     const submitButton = document.getElementById('submit');
@@ -29,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
         errorElement.textContent = '';
         const product = productSelect.value;
         const quantity = quantityInput.value;
+        const pruebas = pruebasInput.value;
+        const mediciones = medicionesInput.value;
+        const limpiezas = limpiezasInput.value;
+        const extraccionOil = extraccionOilInput.value;
         const serviceData = items.map(item => {
             const description = item.querySelector('input[name="description"]').value;
             const photo = item.querySelector('input[name="photo"]').files[0];
@@ -36,9 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (serviceData.every(item => validatePhoto(item.photo))) {
-            addDataToTable(product, quantity, serviceData);
+            addDataToTable(product, quantity, pruebas, mediciones, limpiezas, extraccionOil, serviceData);
             // Aquí se puede implementar la lógica para enviar los datos al servidor
-            console.log('Datos enviados:', { product, quantity, serviceData });
+            console.log('Datos enviados:', { product, quantity, pruebas, mediciones, limpiezas, extraccionOil, serviceData });
         } else {
             errorElement.textContent = 'Por favor, asegúrese de que todas las fotos sean válidas.';
         }
@@ -48,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return file && file.size > 0; // Ejemplo básico: asegúrate de que el archivo no esté vacío
     };
 
-    const addDataToTable = (product, quantity, serviceData) => {
+    const addDataToTable = (product, quantity, pruebas, mediciones, limpiezas, extraccionOil, serviceData) => {
         serviceData.forEach(data => {
             const row = dataTableBody.insertRow();
             row.insertCell(0).textContent = product;
@@ -64,7 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 photoCell.appendChild(img);
             }
 
-            const actionsCell = row.insertCell(4);
+            row.insertCell(4).textContent = pruebas;
+            row.insertCell(5).textContent = mediciones;
+            row.insertCell(6).textContent = limpiezas;
+            row.insertCell(7).textContent = extraccionOil;
+
+            const actionsCell = row.insertCell(8);
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Eliminar';
             deleteButton.addEventListener('click', () => {
@@ -76,6 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Limpiar campos después de enviar
         productSelect.value = '';
         quantityInput.value = '';
+        pruebasInput.value = '';
+        medicionesInput.value = '';
+        limpiezasInput.value = '';
+        extraccionOilInput.value = '';
         serviceItems.innerHTML = '';
         items = [];
     };
