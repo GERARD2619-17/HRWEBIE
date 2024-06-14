@@ -1,6 +1,6 @@
 {
-    "name": "Service Reports",
-    "short_name": "Reports",
+    "name": "Hojas_reportes",
+    "short_name": "HRWEBIE",
     "start_url": "./",
     "scope": "./",
     "display": "standalone",
