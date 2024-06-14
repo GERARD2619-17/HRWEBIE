@@ -1,12 +1,13 @@
-// service-worker.js
 self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open('static-cache').then(cache => {
+        caches.open('service-reports-v1').then(cache => {
             return cache.addAll([
                 '/',
                 '/index.html',
                 '/styles.css',
                 '/app.js',
+                '/db.js',
+                '/manifest.json'
             ]);
         })
     );
