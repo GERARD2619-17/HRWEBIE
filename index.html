@@ -3,34 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paginas de reportes</title>
+    <title>HOJA DE SERVICIO</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <div class="container">
-        <div class="product-selection">
-            <label for="product">Elige un producto</label>
+    <header>
+        <h1>HOJA DE SERVICIO</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <label for="product">Elige un producto:</label>
             <select id="product">
                 <option value="" disabled selected>Seleccione una opción</option>
-                <option value="product1">Trafo 1</option>
-                <option value="product2">trafo 2</option>
-                <option value="product3">Trafo 3</option>
-                <option value="product4">trafo 4</option>
+                <option value="product1">Producto 1</option>
+                <option value="product2">Producto 2</option>
             </select>
-        </div>
-        <div class="quantity-selection">
-            <label for="quantity">Elegir cantidad</label>
+
+            <label for="quantity">Elegir cantidad:</label>
             <input id="quantity" type="number">
-        </div>
-        <div id="service-sheet" class="service-sheet">
-            <h3>Reporte de servicio</h3>
-            <div id="service-items"></div>
+
+            <div class="extra-fields">
+                <label for="pruebas">Pruebas:</label>
+                <textarea id="pruebas" placeholder="Describa las pruebas realizadas"></textarea>
+
+                <label for="mediciones">Mediciones:</label>
+                <textarea id="mediciones" placeholder="Describa las mediciones realizadas"></textarea>
+
+                <label for="limpiezas">Limpiezas:</label>
+                <textarea id="limpiezas" placeholder="Describa las limpiezas realizadas"></textarea>
+
+                <label for="extraccion_oil">Extracción de Aceite:</label>
+                <textarea id="extraccion_oil" placeholder="Describa la extracción de aceite"></textarea>
+            </div>
+
             <button id="add-item">Agregar ítem</button>
-            <button id="submit">Enviar</button>
-            <p id="error" style="color: red;"></p>
         </div>
-    </div>
+
+        <div id="service-items" class="service-items">
+            <!-- Se agregarán ítems aquí -->
+        </div>
+
+        <button id="submit">Enviar</button>
+        <p id="error" style="color: red;"></p>
+
+        <h2>Datos Agregados</h2>
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Descripción</th>
+                    <th>Foto</th>
+                    <th>Pruebas</th>
+                    <th>Mediciones</th>
+                    <th>Limpiezas</th>
+                    <th>Extracción de Aceite</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas de datos aquí -->
+            </tbody>
+        </table>
+    </main>
     <script src="app.js"></script>
 </body>
 </html>
