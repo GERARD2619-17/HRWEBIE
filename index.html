@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Reports</title>
+    <title>Paginas de reportes</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <h1>Service Reports</h1>
-    <form id="reportForm">
-        <label for="date">Fecha:</label>
-        <input type="date" id="date" name="date" required><br>
-        <label for="client">Cliente:</label>
-        <input type="text" id="client" name="client" required><br>
-        <label for="technician">Técnico:</label>
-        <input type="text" id="technician" name="technician" required><br>
-        <label for="recommendations">Recomendaciones/Observaciones:</label><br>
-        <textarea id="recommendations" name="recommendations" required></textarea><br>
-        <button type="submit">Guardar Reporte</button>
-    </form>
-    <div id="reports"></div>
-    
-    <script src="db.js"></script>
+    <div class="container">
+        <div class="product-selection">
+            <label for="product">Elige un producto</label>
+            <select id="product">
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="product1">Trafo 1</option>
+                <option value="product2">trafo 2</option>
+                <option value="product3">Trafo 3</option>
+                <option value="product4">trafo 4</option>
+            </select>
+        </div>
+        <div class="quantity-selection">
+            <label for="quantity">Elegir cantidad</label>
+            <input id="quantity" type="number">
+        </div>
+        <div id="service-sheet" class="service-sheet">
+            <h3>Reporte de servicio</h3>
+            <div id="service-items"></div>
+            <button id="add-item">Agregar ítem</button>
+            <button id="submit">Enviar</button>
+            <p id="error" style="color: red;"></p>
+        </div>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
