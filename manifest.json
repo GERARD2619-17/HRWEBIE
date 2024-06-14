@@ -2,7 +2,9 @@
     "name": "Hojas_reportes",
     "short_name": "HRWEBIE",
     "start_url": "./",
+    "scope": "./",
     "display": "standalone",
+    "orientation": "portrait",
     "background_color": "#ffffff",
     "theme_color": "#000000",
     "icons": [
