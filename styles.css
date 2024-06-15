@@ -142,15 +142,8 @@ tbody tr:nth-child(even) {
     align-items: center;
 }
 
-.service-item input[type="text"],
-.service-item input[type="file"] {
-    flex: 1;
-}
-
-.service-item .remove-item {
-    background-color: #dc3545;
-}
-
-.service-item .remove-item:hover {
-    background-color: #c82333;
+    .form-group {
+        flex: 1 1 30%;
+        margin: 10px;
+    }
 }
