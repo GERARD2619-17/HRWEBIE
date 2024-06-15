@@ -1,146 +1,62 @@
+/* styles.css */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    box-sizing: border-box;
 }
 
-header {
-    background-color: #007BFF;
-    color: white;
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-main {
-    padding: 1rem;
-    max-width: 800px;
-    width: 100%;
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+header, main {
+    padding: 20px;
 }
 
 .form-container {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 10px;
 }
 
 .form-group {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-}
-
-label {
-    font-weight: bold;
-}
-
-select,
-input,
-textarea {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-}
-
-.signature-pad {
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
 
 .btn {
-    padding: 0.5rem 1rem;
-    background-color: #007BFF;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 1rem;
 }
 
 .btn:hover {
     background-color: #0056b3;
 }
 
-.add-btn {
-    align-self: flex-end;
+@media (min-width: 600px) {
+    .form-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .form-group {
+        flex: 1 1 calc(50% - 20px);
+        margin: 10px;
+    }
+
+    .signature-pad {
+        width: 100%;
+        height: auto;
+    }
 }
 
-.submit-btn {
-    background-color: #28a745;
-}
-
-.submit-btn:hover {
-    background-color: #218838;
-}
-
-.error {
-    color: red;
-    margin-top: 1rem;
-}
-
-h2 {
-    margin-top: 2rem;
-    text-align: center;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-table,
-th,
-td {
-    border: 1px solid #ccc;
-}
-
-th,
-td {
-    padding: 0.5rem;
-    text-align: left;
-}
-
-th {
-    background-color: #007BFF;
-    color: white;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.service-items {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.service-item {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
+@media (orientation: landscape) {
+    .form-container {
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
 
     .form-group {
         flex: 1 1 30%;
