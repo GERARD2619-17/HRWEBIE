@@ -11,7 +11,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorElement = document.getElementById('error');
     const dataTableBody = document.getElementById('data-table').querySelector('tbody');
 
-    const signaturePad = new SignaturePad(document.getElementById('signature-pad'));
+    const canvas = document.getElementById('signature-pad');
+    const signaturePad = new SignaturePad(canvas, {
+        minWidth: 1,
+        maxWidth: 2.5,
+        penColor: 'rgb(0, 0, 0)'
+    });
+
+    const resizeCanvas = () => {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext('2d').scale(ratio, ratio);
+        signaturePad.clear();
+    };
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
     const clearSignatureButton = document.getElementById('clear-signature');
 
     let items = [];
