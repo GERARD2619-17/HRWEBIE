@@ -11,7 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorElement = document.getElementById('error');
     const dataTableBody = document.getElementById('data-table').querySelector('tbody');
 
+    const signaturePad = new SignaturePad(document.getElementById('signature-pad'));
+    const clearSignatureButton = document.getElementById('clear-signature');
+
     let items = [];
+
+    clearSignatureButton.addEventListener('click', () => {
+        signaturePad.clear();
+    });
 
     addItemButton.addEventListener('click', () => {
         const newItem = document.createElement('div');
@@ -19,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newItem.innerHTML = `
             <input type="text" name="description" placeholder="Descripción">
             <input type="file" name="photo" accept="image/*">
-            <button class="remove-item">Eliminar</button>
+            <button class="remove-item btn">Eliminar</button>
         `;
         newItem.querySelector('.remove-item').addEventListener('click', () => {
             serviceItems.removeChild(newItem);
@@ -37,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mediciones = medicionesInput.value;
         const limpiezas = limpiezasInput.value;
         const extraccionOil = extraccionOilInput.value;
+        const signatureData = signaturePad.toDataURL();
         const serviceData = items.map(item => {
             const description = item.querySelector('input[name="description"]').value;
             const photo = item.querySelector('input[name="photo"]').files[0];
@@ -44,9 +52,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (serviceData.every(item => validatePhoto(item.photo))) {
-            addDataToTable(product, quantity, pruebas, mediciones, limpiezas, extraccionOil, serviceData);
-            // Aquí se puede implementar la lógica para enviar los datos al servidor
-            console.log('Datos enviados:', { product, quantity, pruebas, mediciones, limpiezas, extraccionOil, serviceData });
+            addDataToTable(product, quantity, pruebas, mediciones, limpiezas, extraccionOil, serviceData, signatureData);
+            // Enviar datos al servidor
+            fetch('http://localhost:3000/api/mantenimientos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    cliente_id: 1, // Usar el ID correspondiente
+                    tecnico_id: 1, // Usar el ID correspondiente
+                    equipo_id: 1, // Usar el ID correspondiente
+                    fecha: new Date().toISOString().split('T')[0],
+                    firma: signatureData,
+                    ultimo_mantenimiento: '2024-01-01', // Cambiar según sea necesario
+                    marca: 'Marca X', // Cambiar según sea necesario
+                    año_de_fabricacion: '2020', // Cambiar según sea necesario
+                    normativa: 'Norma XYZ', // Cambiar según sea necesario
+                    tipo_de_enfriamiento: 'Enfriamiento por aire', // Cambiar según sea necesario
+                    dimensiones: '200x100x50 cm', // Cambiar según sea necesario
+                    peso: '500 kg', // Cambiar según sea necesario
+                    oil: 'Mineral', // Cambiar según sea necesario
+                    presion: '100 PSI', // Cambiar según sea necesario
+                    temperatura: '75°C', // Cambiar según sea necesario
+                    pruebas: pruebas,
+                    mediciones: mediciones,
+                    limpiezas: limpiezas,
+                    extraccion_oil: extraccionOil
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Datos enviados:', data);
+                loadMantenimientos(); // Recargar los mantenimientos después de agregar uno nuevo
+            })
+            .catch(error => console.error('Error:', error));
         } else {
             errorElement.textContent = 'Por favor, asegúrese de que todas las fotos sean válidas.';
         }
@@ -56,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return file && file.size > 0; // Ejemplo básico: asegúrate de que el archivo no esté vacío
     };
 
-    const addDataToTable = (product, quantity, pruebas, mediciones, limpiezas, extraccionOil, serviceData) => {
+    const addDataToTable = (product, quantity, pruebas, mediciones, limpiezas, extraccionOil, serviceData, signatureData) => {
         serviceData.forEach(data => {
             const row = dataTableBody.insertRow();
             row.insertCell(0).textContent = product;
@@ -77,11 +117,26 @@ document.addEventListener('DOMContentLoaded', () => {
             row.insertCell(6).textContent = limpiezas;
             row.insertCell(7).textContent = extraccionOil;
 
-            const actionsCell = row.insertCell(8);
+            const signatureCell = row.insertCell(8);
+            const imgSignature = document.createElement('img');
+            imgSignature.src = signatureData;
+            imgSignature.style.width = '150px';
+            imgSignature.style.height = '50px';
+            signatureCell.appendChild(imgSignature);
+
+            const actionsCell = row.insertCell(9);
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Eliminar';
             deleteButton.addEventListener('click', () => {
-                dataTableBody.removeChild(row);
+                fetch(`http://localhost:3000/api/mantenimientos/${data.mantenimiento_id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Mantenimiento eliminado:', data);
+                    dataTableBody.removeChild(row);
+                })
+                .catch(error => console.error('Error:', error));
             });
             actionsCell.appendChild(deleteButton);
         });
@@ -96,6 +151,50 @@ document.addEventListener('DOMContentLoaded', () => {
         serviceItems.innerHTML = '';
         items = [];
     };
+
+    const loadMantenimientos = () => {
+        fetch('http://localhost:3000/api/mantenimientos')
+            .then(response => response.json())
+            .then(data => {
+                dataTableBody.innerHTML = '';
+                data.forEach(mantenimiento => {
+                    const row = dataTableBody.insertRow();
+                    row.insertCell(0).textContent = mantenimiento.product;
+                    row.insertCell(1).textContent = mantenimiento.quantity;
+                    row.insertCell(2).textContent = mantenimiento.description;
+                    row.insertCell(3).textContent = mantenimiento.pruebas;
+                    row.insertCell(4).textContent = mantenimiento.mediciones;
+                    row.insertCell(5).textContent = mantenimiento.limpiezas;
+                    row.insertCell(6).textContent = mantenimiento.extraccion_oil;
+
+                    const signatureCell = row.insertCell(7);
+                    const imgSignature = document.createElement('img');
+                    imgSignature.src = mantenimiento.firma;
+                    imgSignature.style.width = '150px';
+                    imgSignature.style.height = '50px';
+                    signatureCell.appendChild(imgSignature);
+
+                    const actionsCell = row.insertCell(8);
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Eliminar';
+                    deleteButton.addEventListener('click', () => {
+                        fetch(`http://localhost:3000/api/mantenimientos/${mantenimiento.mantenimiento_id}`, {
+                            method: 'DELETE'
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Mantenimiento eliminado:', data);
+                            dataTableBody.removeChild(row);
+                        })
+                        .catch(error => console.error('Error:', error));
+                    });
+                    actionsCell.appendChild(deleteButton);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    };
+
+    loadMantenimientos(); // Cargar los mantenimientos cuando se cargue la página
 });
 
 // Registrar Service Worker para PWA
