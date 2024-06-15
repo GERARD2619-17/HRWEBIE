@@ -6,6 +6,7 @@
     <title>HOJA DE SERVICIO</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </head>
 <body>
     <header>
@@ -13,39 +14,48 @@
     </header>
     <main>
         <div class="form-container">
-            <label for="product">Elige un producto:</label>
-            <select id="product">
-                <option value="" disabled selected>Seleccione una opción</option>
-                <option value="product1">Producto 1</option>
-                <option value="product2">Producto 2</option>
-            </select>
-
-            <label for="quantity">Elegir cantidad:</label>
-            <input id="quantity" type="number">
-
-            <div class="extra-fields">
+            <div class="form-group">
+                <label for="product">Elige un producto:</label>
+                <select id="product">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="product1">Producto 1</option>
+                    <option value="product2">Producto 2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Elegir cantidad:</label>
+                <input id="quantity" type="number">
+            </div>
+            <div class="form-group">
                 <label for="pruebas">Pruebas:</label>
                 <textarea id="pruebas" placeholder="Describa las pruebas realizadas"></textarea>
-
+            </div>
+            <div class="form-group">
                 <label for="mediciones">Mediciones:</label>
                 <textarea id="mediciones" placeholder="Describa las mediciones realizadas"></textarea>
-
+            </div>
+            <div class="form-group">
                 <label for="limpiezas">Limpiezas:</label>
                 <textarea id="limpiezas" placeholder="Describa las limpiezas realizadas"></textarea>
-
+            </div>
+            <div class="form-group">
                 <label for="extraccion_oil">Extracción de Aceite:</label>
                 <textarea id="extraccion_oil" placeholder="Describa la extracción de aceite"></textarea>
             </div>
-
-            <button id="add-item">Agregar ítem</button>
+            <div class="form-group">
+                <label for="signature">Firma:</label>
+                <canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+                <button id="clear-signature" class="btn">Borrar Firma</button>
+            </div>
+            <button id="add-item" class="btn add-btn">Agregar ítem</button>
         </div>
 
         <div id="service-items" class="service-items">
             <!-- Se agregarán ítems aquí -->
         </div>
 
-        <button id="submit">Enviar</button>
-        <p id="error" style="color: red;"></p>
+        <button id="submit" class="btn submit-btn">Enviar</button>
+        <p id="error" class="error"></p>
 
         <h2>Datos Agregados</h2>
         <table id="data-table">
@@ -59,6 +69,7 @@
                     <th>Mediciones</th>
                     <th>Limpiezas</th>
                     <th>Extracción de Aceite</th>
+                    <th>Firma</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
