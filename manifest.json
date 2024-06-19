@@ -1,12 +1,12 @@
 {
     "name": "Hojas_reportes",
     "short_name": "HRWEBIE",
-    "start_url": "./",
+    "start_url": "/index.html",
     "scope": "./",
     "display": "standalone",
    
     "background_color": "#ffffff",
-    "theme_color": "#000000",
+    "theme_color": "#007bff",
     "icons": [
         {
             "src": "logoredondosintransparencia192x192.png",

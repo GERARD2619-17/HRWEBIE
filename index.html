@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte de Servicio Técnico</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registrado con éxito:', registration);
+                })
+                .catch(error => {
+                    console.log('Fallo al registrar el Service Worker:', error);
+                });
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -17,7 +29,6 @@
                 <option value="Padmounted">Padmounted</option>
                 <option value="Banco trifásico">Banco trifásico</option>
                 <option value="Monofásico">Monofásico</option>
-                <!-- Puedes agregar más opciones aquí -->
             </select>
             <label for="cantidad">Cantidad:</label>
             <input type="number" id="cantidad" placeholder="Cantidad">
@@ -26,14 +37,11 @@
         <div class="list-group">
             <h2>Equipos Seleccionados</h2>
             <div id="lista-equipos">
-                <!-- Lista de equipos seleccionados -->
             </div>
         </div>
         <div class="reportes-group">
             <button id="anterior">Anterior</button>
-            <div id="hoja-servicio">
-                <!-- Hoja de servicio generada aquí -->
-            </div>
+            <div id="hoja-servicio"></div>
             <button id="siguiente">Siguiente</button>
         </div>
         <div class="send-group">
