@@ -8,25 +8,37 @@
 </head>
 <body>
     <div class="container">
-        <div class="dropdown">
+        <div class="header">
+            <h1>Reporte de Servicio Técnico</h1>
+        </div>
+        <div class="form-group">
             <label for="equipos">Equipos:</label>
             <select id="equipos">
-                <!-- Opciones de equipos -->
+                <option value="Padmounted">Padmounted</option>
+                <option value="Banco trifásico">Banco trifásico</option>
+                <option value="Monofásico">Monofásico</option>
+                <!-- Puedes agregar más opciones aquí -->
             </select>
+            <label for="cantidad">Cantidad:</label>
             <input type="number" id="cantidad" placeholder="Cantidad">
             <button id="agregar">Agregar</button>
         </div>
-        <div class="lista">
-            <!-- Lista de equipos seleccionados -->
+        <div class="list-group">
+            <h2>Equipos Seleccionados</h2>
+            <div id="lista-equipos">
+                <!-- Lista de equipos seleccionados -->
+            </div>
         </div>
-        <div class="reportes">
+        <div class="reportes-group">
             <button id="anterior">Anterior</button>
             <div id="hoja-servicio">
                 <!-- Hoja de servicio generada aquí -->
             </div>
             <button id="siguiente">Siguiente</button>
         </div>
-        <button id="enviar">Enviar</button>
+        <div class="send-group">
+            <button id="enviar">Enviar</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

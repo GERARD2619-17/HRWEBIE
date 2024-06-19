@@ -1,13 +1,86 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
+
 .container {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
     width: 90%;
-    margin: 0 auto;
+    max-width: 600px;
 }
-.dropdown, .lista, .reportes {
+
+.header {
+    text-align: center;
     margin-bottom: 20px;
 }
-button {
-    margin-left: 10px;
+
+.form-group, .list-group, .reportes-group, .send-group {
+    margin-bottom: 20px;
+}
+
+.form-group label, .form-group select, .form-group input, .form-group button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#agregar {
+    width: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+#lista-equipos {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+#hoja-servicio {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-height: 300px;
+}
+
+.send-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.send-group button:hover {
+    background-color: #0056b3;
 }
