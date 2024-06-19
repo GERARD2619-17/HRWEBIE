@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Servicio Técnico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="dropdown">
+            <label for="equipos">Equipos:</label>
+            <select id="equipos">
+                <!-- Opciones de equipos -->
+            </select>
+            <input type="number" id="cantidad" placeholder="Cantidad">
+            <button id="agregar">Agregar</button>
+        </div>
+        <div class="lista">
+            <!-- Lista de equipos seleccionados -->
+        </div>
+        <div class="reportes">
+            <button id="anterior">Anterior</button>
+            <div id="hoja-servicio">
+                <!-- Hoja de servicio generada aquí -->
+            </div>
+            <button id="siguiente">Siguiente</button>
+        </div>
+        <button id="enviar">Enviar</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
