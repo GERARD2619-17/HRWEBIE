@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+.dropdown, .lista, .reportes {
+    margin-bottom: 20px;
+}
+button {
+    margin-left: 10px;
+}
